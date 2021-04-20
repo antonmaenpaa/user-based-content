@@ -59,6 +59,8 @@ const mainPostContainer = {
     display: "flex",
     marginTop: "5rem",
     flexWrap: "wrap",
+    justifyContent: "center",
+    alignItems: "center"
 }
 
 const postContainer = {
