@@ -21,7 +21,6 @@ function Register() {
    )
 }
 
-
 export default Register;
 const form = {
     display: "flex",
