@@ -1,18 +1,13 @@
 import { MdModeEdit, MdDelete } from "react-icons/md";
 
-
-function Post() {
+function Post(props) {
 
     return(
         <div style={rootStyle}>
             <MdModeEdit />
             <MdDelete />
-            <h4>Titel</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                 nisi ut aliquip ex ea commodo consequat.
-            </p>
+            <h4>{props.title}</h4>
+            <p>{props.text}</p>
         </div>
     )
 }
