@@ -1,0 +1,19 @@
+GET http://localhost:5000/posts
+
+###
+
+POST http://localhost:5000/posts
+Content-Type: application/json
+
+{
+    "title": "jeu",
+    "text": "jeu"
+}
+
+###
+
+DELETE http://localhost:5000/posts/60800fa4172d004c74da0040
+
+###
+
+

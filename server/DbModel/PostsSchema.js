@@ -1,16 +1,13 @@
 // Här skapar vi modellen för våra inlägg som vi skapar som sedan skickas upp till vår MongoDB
 
-let mongoose = require('mongoose');
+let mongoose = require("mongoose");
 let Schema = mongoose.Schema;
 
-
-
 let PostsSchema = new Schema({
-   title: String,
-   text: String,
-
+  title: String,
+  text: String,
 });
 
-let Posts = mongoose.model('Posts',  PostsSchema) // Our DB - collections name is ' Posts'
+let Posts = mongoose.model("Posts", PostsSchema); // Our DB - collections name is ' Posts'
 
 module.exports = Posts;
