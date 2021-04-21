@@ -22,7 +22,7 @@ const rootStyle = {
     justifyContent: "space-between",
     padding: "0 2rem",
     background: "black",
-    position: "fixed",
+    position: "sticky",
     left: 0,
     right: 0,
     top: 0
