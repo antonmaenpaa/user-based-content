@@ -16,4 +16,10 @@ DELETE http://localhost:5000/posts/60800fa4172d004c74da0040
 
 ###
 
+PUT http://localhost:5000/posts/608028240340eb0a98452eb9
+Content-Type: application/json
 
+{
+    "title": "hej gustav",
+    "text": "hej gustav"
+}
