@@ -5,6 +5,7 @@ const port = 5000;
 const path = require('path');
 const bcrypt = require('bcrypt');
 const mongoose = require("mongoose");
+const PostsRouter = require('./Routers/Posts.router')
 
 // DB schema
 
@@ -30,8 +31,10 @@ mongoose.connect(`mongodb+srv://Admin:Admin123@cluster0.gnwvi.mongodb.net/myFirs
 
 
 app.use(express.static(path.join(__dirname, '../client')));
-
 app.use(express.json());
+app.use(PostsRouter);
+
+
 
 // View all posts
 app.get('/', (req, res) => {    
@@ -40,7 +43,7 @@ app.get('/', (req, res) => {
 
 
 
-// skapar en användare som skickas till db
+// Creates a user
 
 module.exports.post = async (req, res, err) => {
     console.log("post");

@@ -6,13 +6,13 @@ let Schema = mongoose.Schema;
 
 
 let UserSchema = new Schema({
-   email: String,
-   password: String,
-   repeatpassword: String,
+   email: {type: 'String', required: true},
+   password: {type: 'String', required: true},
+   repeatpassword: {type: 'String', required: true},
 
 
 });
 
-let Users = mongoose.model('Users',  UserSchema)
+let Users = mongoose.model('Users',  UserSchema) // Our DB - collection name is Users
 
 module.exports = Users;

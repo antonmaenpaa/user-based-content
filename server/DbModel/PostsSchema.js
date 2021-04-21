@@ -11,6 +11,6 @@ let PostsSchema = new Schema({
 
 });
 
-let Posts = mongoose.model('Posts',  PostsSchema)
+let Posts = mongoose.model('Posts',  PostsSchema) // Our DB - collections name is ' Posts'
 
 module.exports = Posts;
