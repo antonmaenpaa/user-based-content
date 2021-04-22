@@ -1,13 +1,30 @@
 import { Link } from "react-router-dom"
+import {useState} from "react"
+
+
 
 function LoginButton(){
     console.log("login")
+
 }
 
-function Login() {
 
-    
 
+const Login = async () => {
+    let body;
+    const response = await fetch("/users", {
+        method: "GET",
+        body: JSON.stringify(body),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+   await response.json()
+
+   
+   
+}
+function log() {
     return (
         <div style={rootStyle}>
             <div style={form}>
@@ -17,17 +34,18 @@ function Login() {
                 <button style={ButtonLogin} onClick={LoginButton()}> Login </button>
             </div>
             <div style={regConatiner}>
-                <p>If you dont have an accountplease register below</p>
+                <p>If you dont have an account please register below</p>
                 <Link to="/register" style={ButtonReg}>
                     <span> Register </span>
                 </Link>
             </div>
         </div>
-
     )
 }
 
-export default Login;
+export default log;
+
+
 
 const form = {
     display: "flex",
