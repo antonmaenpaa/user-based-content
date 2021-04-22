@@ -4,11 +4,12 @@ import {useState} from "react"
 
 
 function LoginButton(){
+    // If-sats som kollar ifall det finns en user - om nej skicka meddelande - " registrera dig"
     console.log("login")
 
 }
 
-
+const [setLogedInUser] = useState()
 
 const Login = async () => {
     let body;
@@ -19,7 +20,9 @@ const Login = async () => {
             "Content-Type": "application/json"
         }
     });
-   await response.json()
+    const logedInUser = await response.json()
+    setLogedInUser(logedInUser)
+    console.log(logedInUser)
 
    
    
@@ -44,6 +47,11 @@ function log() {
 }
 
 export default log;
+
+
+
+
+
 
 
 
