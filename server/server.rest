@@ -6,13 +6,13 @@ POST http://localhost:5000/posts
 Content-Type: application/json
 
 {
-    "title": "jeu",
-    "text": "jeu"
+    "title": "test5",
+    "text": "test"
 }
 
 ###
 
-DELETE http://localhost:5000/posts/60800fa4172d004c74da0040
+DELETE http://localhost:5000/posts/608028240340eb0a98452eb9
 
 ###
 
