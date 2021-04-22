@@ -6,8 +6,8 @@ POST http://localhost:5000/posts
 Content-Type: application/json
 
 {
-    "title": "jeu",
-    "text": "jeu"
+    "title": "hej anton",
+    "text": "jag heter anton"
 }
 
 ###

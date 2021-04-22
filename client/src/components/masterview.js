@@ -1,49 +1,60 @@
 import Post from "./post"
+import  React, { Component }  from "react";
 
-function MasterView() {
 
-    return (
-        <div style={postContainer}>
-            <div style={mainPostContainer}>
-                <Post title="Lorem" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                 nisi ut aliquip ex ea commodo consequat." 
-                />
-                <Post title="Lorem" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                 nisi ut aliquip ex ea commodo consequat." 
-                />
-                <Post title="Lorem" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                 nisi ut aliquip ex ea commodo consequat." 
-                />
-                <Post title="Lorem" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                 nisi ut aliquip ex ea commodo consequat." 
-                />
-                <Post title="Lorem" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                 nisi ut aliquip ex ea commodo consequat." 
-                />
 
+class MasterView extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            posts: []
+        };
+  }
+    
+    
+    async componentDidMount() {
+        let body;
+        const response = await fetch("/posts", {
+            method: "GET",
+            body: JSON.stringify(body),
+            headers: {
+                "Content-Type": "application/json"
+            }
+    });
+        const result = await response.json();
+        this.setState({
+            posts: result
+        })  
+    }
+    
+    render() {      
+        return (
+            <div style={postContainer}>
+                <div style={mainPostContainer}>
+                {
+                    this.state.posts.map((post, index) => (
+
+                        <Post key={post._id} title={post.title} text={post.text}
+                        />
+                        
+                        ))
+                    }
+    
+                </div>
+                
+                <div style={formDiv}>
+                    <form style={form} action="" method="POST">
+                        <label name="title">Title</label>
+                        <input name="title" id="title" placeholder="Title"></input>
+                        <label name="text">Text</label>
+                        <textarea name="text" rows="4" cols="50" placeholder="What do you want to write about today?" id="text"></textarea>
+                        <button type="submit">Post</button>
+                    </form>
+                </div>
             </div>
-            
-            <div style={formDiv}>
-                <form style={form} action="" method="POST">
-                    <label name="title">Title</label>
-                    <input name="title" id="title" placeholder="Title"></input>
-                    <label name="text">Text</label>
-                    <textarea name="text" rows="4" cols="50" placeholder="What do you want to write about today?" id="text"></textarea>
-                    <button type="submit">Post</button>
-                </form>
-            </div>
-        </div>
-    )
+        )
+    }    
 }
 
 const formDiv = {
@@ -73,14 +84,17 @@ const form = {
 }
 const mainPostContainer = {
     display: "flex",
-    marginTop: "5rem",
+    marginTop: "1.5rem",
     flexWrap: "wrap",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    flexDirection: "column",
+    width: "100%"
 }
 
 const postContainer = {
     display: "flex",
+    width: "100%",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-between",
