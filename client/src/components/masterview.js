@@ -8,9 +8,14 @@ class MasterView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            posts: []
+            posts: [],
+            title: "",
+            text: "",
         };
         this.deletePost = this.deletePost.bind(this)
+        this.UpdateTitleFields = this.UpdateTitleFields.bind(this);
+        this.UpdateTextFields = this.UpdateTextFields.bind(this);
+        this.addNewPost = this.addNewPost.bind(this);
   }
 
 
@@ -33,12 +38,50 @@ class MasterView extends Component {
     return result
 
 }
+    async addNewPost(e) {
+        e.preventDefault()   
+    
+        let body = {
+            title: this.state.title, 
+            text: this.state.text
+        }
+        
+        const response = await fetch("/posts", {
+            method: "POST",
+            body: JSON.stringify(body),
+            headers: {
+                "Content-Type": "application/json"
+            }
+    });
+        const result = await response.json();
+        await this.getAllPosts()
+        this.setState({
+            title: "",
+            text: ""
+        })
+        return result
+  
+    }
+    
+
+    UpdateTitleFields(e) {    
+        this.setState({
+            title: e.target.value
+        })
+        
+    }
+
+    UpdateTextFields(e) {
+        this.setState({
+            text: e.target.value
+        })
+    }
 
     async editPost() {
         console.log("EDIT POST")
         let id;
         let body;
-        const response = await fetch(`/posts/:608028240340eb0a98452eb9`, {
+        const response = await fetch('/posts/' + id, {
             method: "PUT",
             body: JSON.stringify(body),
             headers: {
@@ -90,17 +133,29 @@ class MasterView extends Component {
                 </div>
                 
                 <div style={formDiv}>
-                    <form style={form} action="" method="POST">
+                    <form style={form} onSubmit={this.addNewPost} action="" method="POST">
                         <label name="title">Title</label>
                         <input 
                             name="title" 
                             id="title" 
                             placeholder="Title"
+                            onChange={this.UpdateTitleFields}
+                            value={this.state.title}
                             >
                    
                             </input>
                         <label name="text">Text</label>
-                        <textarea name="text" rows="4" cols="50" placeholder="What do you want to write about today?" id="text"></textarea>
+                        <textarea 
+                        name="text" 
+                        rows="4" 
+                        cols="50" 
+                        placeholder="What do you want to write about today?" 
+                        id="text"
+                        onChange={this.UpdateTextFields}
+                        value={this.state.text}
+                        >
+
+                        </textarea>
                         <button type="submit">Post</button>
                     </form>
                 </div>
