@@ -1,17 +1,23 @@
 import { Link } from "react-router-dom"
-import {useState} from "react"
+import React from "react"
+import Users from "../../../server/DbModel/UserSchema";
 
 
 
 function LoginButton(){
-    // If-sats som kollar ifall det finns en user - om nej skicka meddelande - " registrera dig"
-    console.log("login")
-
+   
+    if(Users.email && Users.password){
+       console.log("hej")
+       
+    } else {
+        console.log("hejdå")
+    }
 }
 
-const [setLogedInUser] = useState()
 
-const Login = async () => {
+
+ async function GetLogin () {
+
     let body;
     const response = await fetch("/users", {
         method: "GET",
@@ -20,21 +26,24 @@ const Login = async () => {
             "Content-Type": "application/json"
         }
     });
-    const logedInUser = await response.json()
-    setLogedInUser(logedInUser)
-    console.log(logedInUser)
+    const logedInUsers = await response.json()
+    console.log(logedInUsers, 'logedInUsers')
+    return logedInUsers
 
-   
-   
 }
+
+
+
 function log() {
-    return (
+
+
+return (
         <div style={rootStyle}>
             <div style={form}>
                 <h2 style={LoginText} >Please login</h2>
                 <input style={InputFieldName} placeholder="Name"/>
                 <input style={InputFieldPassword} placeholder="Password"/>
-                <button style={ButtonLogin} onClick={LoginButton()}> Login </button>
+                <button style={ButtonLogin} onClick={LoginButton(GetLogin())}> Login </button>
             </div>
             <div style={regConatiner}>
                 <p>If you dont have an account please register below</p>
