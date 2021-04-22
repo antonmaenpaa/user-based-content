@@ -4,22 +4,40 @@ import  React, { Component }  from "react";
 
 
 class MasterView extends Component {
-
+    
     constructor(props) {
         super(props);
         this.state = {
             posts: [],
             title: "",
             text: "",
+            showEditBtn: false
         };
-        this.deletePost = this.deletePost.bind(this)
+        this.deletePost = this.deletePost.bind(this);
         this.UpdateTitleFields = this.UpdateTitleFields.bind(this);
         this.UpdateTextFields = this.UpdateTextFields.bind(this);
         this.addNewPost = this.addNewPost.bind(this);
-  }
+        this.editPost = this.editPost.bind(this);
+        this.savePost = this.savePost.bind(this);
+    }
 
-
+    async componentDidMount() {
+        this.getAllPosts();
+    }
     
+    UpdateTitleFields(e) {    
+        this.setState({
+            title: e.target.value
+        })
+    }
+    
+    UpdateTextFields(e) {
+        this.setState({
+            text: e.target.value
+        })
+    }
+
+    // DELETE POST
     async deletePost(e) {
     console.log('DELETE')
     let body;
@@ -38,19 +56,68 @@ class MasterView extends Component {
     return result
 
 }
+
+    async savePost(e, userId) {
+        console.log('SAVE POST')
+        // e.preventDefault();
+
+        // console.log(userId)
+    
+        // let body = {
+        //     title: this.state.title,
+        //     text: this.state.text
+        // }
+        // const response = await fetch('/posts/' + userId, {
+        //     method: "PUT",
+        //     body: JSON.stringify(body),
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         "Accept": "application/json"
+        //     }
+        // });
+        
+        
+        
+        // const result = await response.json();
+        // console.log(result)
+        // await this.getAllPosts()
+        // return result
+    }
+
+
+    // EDIT POST
+    async editPost(e) {
+        console.log("EditPost Function")
+        // e.preventDefault();
+        
+        // const editText = e.target.parentElement.parentElement.querySelector("p").textContent
+        // const editTitle = e.target.parentElement.parentElement.querySelector("h4").textContent;
+        // let userId = e.target.parentElement.parentElement.parentElement.dataset.id
+
+        
+        // this.setState({
+        //     title: editTitle,
+        //     text: editText,
+        //     showEditBtn: true
+        // })
+        
+        // await this.savePost(e, userId)
+        
+    }
+
+    // ADD NEW POST
     async addNewPost(e) {
         e.preventDefault()   
     
         let body = {
             title: this.state.title, 
             text: this.state.text
-        }
-        
+        }   
         const response = await fetch("/posts", {
             method: "POST",
             body: JSON.stringify(body),
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
             }
     });
         const result = await response.json();
@@ -60,39 +127,10 @@ class MasterView extends Component {
             text: ""
         })
         return result
-  
     }
     
 
-    UpdateTitleFields(e) {    
-        this.setState({
-            title: e.target.value
-        })
-        
-    }
-
-    UpdateTextFields(e) {
-        this.setState({
-            text: e.target.value
-        })
-    }
-
-    async editPost() {
-        console.log("EDIT POST")
-        let id;
-        let body;
-        const response = await fetch('/posts/' + id, {
-            method: "PUT",
-            body: JSON.stringify(body),
-            headers: {
-                "Content-Type": "application/json"
-            }
-    });
-        const result = await response.json();
-        console.log(result)
-        
-    }
-    
+    // RENDER ALL POSTS
     async getAllPosts() {
         let body;
         const response = await fetch("/posts", {
@@ -108,12 +146,10 @@ class MasterView extends Component {
         })  
     }
     
-
-    async componentDidMount() {
-        this.getAllPosts();
-    }
     
-    render() {      
+    render() {   
+         console.log("TITLE:", this.state.title)   
+         console.log("TEXT:", this.state.text)   
         return (
             <div style={postContainer}>
                 <div style={mainPostContainer}>
@@ -133,7 +169,7 @@ class MasterView extends Component {
                 </div>
                 
                 <div style={formDiv}>
-                    <form style={form} onSubmit={this.addNewPost} action="" method="POST">
+                    <form style={form} action="" method="POST">
                         <label name="title">Title</label>
                         <input 
                             name="title" 
@@ -156,7 +192,14 @@ class MasterView extends Component {
                         >
 
                         </textarea>
-                        <button type="submit">Post</button>
+                        {   this.state.showEditBtn && (
+                            <button onClick={this.savePost}>Edit</button>
+                        )
+                        }
+                        {   !this.state.showEditBtn && (
+                        <button onClick={this.addNewPost}>Post</button>
+                        )
+                        }
                     </form>
                 </div>
             </div>

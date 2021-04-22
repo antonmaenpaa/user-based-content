@@ -9,8 +9,8 @@ function Post(props) {
         <div style={rootStyle}>
             <MdModeEdit style={{fontSize: "1.5rem", marginRight: "1rem"}} onClick={props.editPost}/>
             <MdDelete style={{fontSize: "1.5rem"}} onClick={props.deletePost}/>
-            <h4>{props.title}</h4>
-            <p>{props.text}</p>
+            <h4 type="title">{props.title}</h4>
+            <p type="text">{props.text}</p>
         </div>
     )
 }
