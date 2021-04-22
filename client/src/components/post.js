@@ -2,10 +2,13 @@ import { MdModeEdit, MdDelete } from "react-icons/md";
 
 function Post(props) {
 
+
+
+
     return(
         <div style={rootStyle}>
-            <MdModeEdit onClick={props.edit}/>
-            <MdDelete onClick={props.delete} />
+            <MdModeEdit style={{fontSize: "1.5rem", marginRight: "1rem"}} onClick={props.editPost}/>
+            <MdDelete style={{fontSize: "1.5rem"}} onClick={props.deletePost}/>
             <h4>{props.title}</h4>
             <p>{props.text}</p>
         </div>
