@@ -23,3 +23,32 @@ Content-Type: application/json
     "title": "hej gustav",
     "text": "hej gustav"
 }
+
+###
+
+GET http://localhost:5000/users
+
+
+###
+
+POST http://localhost:5000/register
+Content-Type: application/json
+
+{
+    "email": "gustav",
+    "password": "1234567"
+}
+
+###
+
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "gustav",
+    "password": "1234567"
+}
+
+###
+
+DELETE http://localhost:5000/logout
