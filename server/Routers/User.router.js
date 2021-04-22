@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
 const Users = require("../DbModel/UserSchema");
 
 // Creates a user
+
 
 router.post = async (req, res, err) => {
   console.log("post");

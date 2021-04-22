@@ -3,7 +3,6 @@ const { MongoServerSelectionError } = require("mongodb");
 const app = express();
 const port = 5000;
 const path = require("path");
-const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const PostsRouter = require("./Routers/Posts.router");
 const UsersRouter = require("./Routers/User.router");
@@ -21,16 +20,19 @@ let Posts = require("./DbModel/PostsSchema"); // denna ska kopplas till en POST 
 
 // Connection to DB
 
+
+
+// 
 mongoose
   .connect(
-    `mongodb+srv://Admin:Admin123@cluster0.gnwvi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
+    `mongodb+srv://newuserlol:newuserlol123@cluster0.gnwvi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => {
     console.log("You are now connected to your database!");
   })
-  .catch((err) => {
-    console.err(err);
+  .catch((error) => {
+    console.error(error);
   });
 
 app.listen(port, () => {
