@@ -223,6 +223,7 @@ const form = {
 const mainPostContainer = {
     display: "flex",
     flexWrap: "wrap",
+    marginTop:"1rem",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
