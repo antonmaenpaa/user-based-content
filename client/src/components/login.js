@@ -1,33 +1,96 @@
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
+import React, { Component } from "react"
 
-function LoginButton(){
-    console.log("login")
+
+export default class Log extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            email: "",
+            password: "",
+            errors: {},
+            users: [],
+            redirect: false
+        };
+        this.passwordField = this.passwordField.bind(this)
+        this.emailField = this.emailField.bind(this)
+        this.loginButton = this.loginButton.bind(this)
+    }
+
+
+    async componentDidMount() {
+        try {
+            let body;
+            const response = await fetch("/users", {
+                method: "GET",
+                body: JSON.stringify(body),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            const data = await response.json()
+            this.setState({
+                users: data
+            })
+        }
+        catch (e) {
+            console.log('error')
+        }
+    }
+
+    loginButton() {
+        let users = this.state.users
+
+        console.log(users)
+        console.log(this.state.email)
+
+        if (users[0].email === this.state.email && users[0].password === this.state.password) {
+            this.setState({
+                redirect: true
+            })
+
+        } else {
+            alert('fuck u')
+            console.log("fuck u")
+        }
+
+    }
+    emailField(e) {
+        this.setState({
+            email: e.target.value
+        })
+    }
+    passwordField(e) {
+        this.setState({
+            password: e.target.value
+        })
+    }
+
+    render() {
+        if (this.state.redirect === true) {
+            return <Redirect to="/" />
+        }
+        return (
+            <div style={rootStyle}>
+                <div style={form}>
+                    <h2 style={LoginText} >Please login</h2>
+                    <input style={InputFieldName} onChange={this.emailField} value={this.state.email} placeholder="Email" />
+                    <input style={InputFieldPassword} onChange={this.passwordField} value={this.state.password} placeholder="Password" />
+                    <button style={ButtonLogin} value={this} onClick={this.loginButton}> Login </button>
+                </div>
+                <div style={regConatiner}>
+                    <p>If you dont have an account please register below</p>
+                    <Link to="/register" style={ButtonReg}>
+                        <span> Register </span>
+                    </Link>
+                </div>
+            </div>
+        )
+    }
 }
 
-function Login() {
 
-    
-
-    return (
-        <div style={rootStyle}>
-            <div style={form}>
-                <h2 style={LoginText} >Please login</h2>
-                <input style={InputFieldName} placeholder="Name"/>
-                <input style={InputFieldPassword} placeholder="Password"/>
-                <button style={ButtonLogin} onClick={LoginButton()}> Login </button>
-            </div>
-            <div style={regConatiner}>
-                <p>If you dont have an accountplease register below</p>
-                <Link to="/register" style={ButtonReg}>
-                    <span> Register </span>
-                </Link>
-            </div>
-        </div>
-
-    )
-}
-
-export default Login;
 
 const form = {
     display: "flex",
@@ -50,7 +113,7 @@ const rootStyle = {
 }
 const LoginText = {
     position: "relative",
-    textAlgin: "center", 
+    textAlgin: "center",
 }
 
 const InputFieldName = {
@@ -70,19 +133,19 @@ const InputFieldPassword = {
 }
 
 const ButtonLogin = {
-  display: "block",
-  width: "15.5rem",
-  height: "2rem",
-  margin: "1rem",
-  color: "white",
-  backgroundColor: "green",
-  cursor: "pointer",
+    display: "block",
+    width: "15.5rem",
+    height: "2rem",
+    margin: "1rem",
+    color: "white",
+    backgroundColor: "green",
+    cursor: "pointer",
 
 }
 
 const ButtonReg = {
-  textDecoration: "none",
-   color: "blue",
+    textDecoration: "none",
+    color: "blue",
 }
 
 const regConatiner = {
@@ -92,7 +155,7 @@ const regConatiner = {
     alignItems: "center"
 }
 
- 
-    
+
+
 
 
