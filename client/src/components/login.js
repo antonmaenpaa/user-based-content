@@ -1,49 +1,57 @@
 import { Link } from "react-router-dom"
-import React from "react"
-import Users from "../../../server/DbModel/UserSchema";
+import React, {Component} from "react"
+// import Users from "../../../server/DbModel/UserSchema";
 
 
 
 function LoginButton(){
-   
-    if(Users.email && Users.password){
-       console.log("hej")
-       
+    if( this.props.email && this.props.password){
+        // skicka vidare till main-page       
     } else {
-        console.log("hejdå")
+        console.log("You are not a user , please register!")
     }
 }
 
 
+export default class log extends Component {
+        Constructor(props){
+            this.State = {
+            email: "",
+            password: "",
+            errors: {},
+        };
+        this.setState({email: "email", password: "password"})
+    }
 
- async function GetLogin () {
-
-    let body;
-    const response = await fetch("/users", {
-        method: "GET",
-        body: JSON.stringify(body),
-        headers: {
-            "Content-Type": "application/json"
+    async componentDidMount(){
+        try {
+            let body;
+            const response = await fetch("/users", {
+                method: "GET",
+                body: JSON.stringify(body),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            const data = await response.json()
+            console.log(data, 'Users')
+        
         }
-    });
-    const logedInUsers = await response.json()
-    console.log(logedInUsers, 'logedInUsers')
-    return logedInUsers
+        catch(e){
+          console.log('error')
+        }
+    }
 
-}
-
-
-
-function log() {
-
-
+    
+        
+render() {
 return (
         <div style={rootStyle}>
             <div style={form}>
                 <h2 style={LoginText} >Please login</h2>
                 <input style={InputFieldName} placeholder="Name"/>
                 <input style={InputFieldPassword} placeholder="Password"/>
-                <button style={ButtonLogin} onClick={LoginButton(GetLogin())}> Login </button>
+                <button style={ButtonLogin}  value={this} onClick={LoginButton()}> Login </button>
             </div>
             <div style={regConatiner}>
                 <p>If you dont have an account please register below</p>
@@ -52,15 +60,8 @@ return (
                 </Link>
             </div>
         </div>
-    )
+ )}
 }
-
-export default log;
-
-
-
-
-
 
 
 
