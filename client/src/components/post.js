@@ -7,8 +7,8 @@ function Post(props) {
 
     return(
         <div style={rootStyle}>
-            <MdModeEdit style={{fontSize: "1.5rem", marginRight: "1rem"}} onClick={props.editPost}/>
-            <MdDelete style={{fontSize: "1.5rem"}} onClick={props.deletePost}/>
+            <MdModeEdit style={{fontSize: "1.5rem", marginRight: "1rem", cursor: "pointer"}} onClick={props.editPost}/>
+            <MdDelete style={{fontSize: "1.5rem", cursor: "pointer"}} onClick={props.deletePost}/>
             <h4 type="title">{props.title}</h4>
             <p type="text">{props.text}</p>
         </div>
@@ -23,7 +23,6 @@ const rootStyle = {
     webkitboxShadow: "1px 1px 5px 0px rgba(0,0,0,0.75)",
     MozBoxShadow: "1px 1px 5px 0px rgba(0,0,0,0.75)",
     boxShadow: "1px 1px 5px 0px rgba(0,0,0,0.75)",
-    width: "90%"
 }
 
 export default Post;
