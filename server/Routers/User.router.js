@@ -24,7 +24,7 @@ router.get('/users' ,async (req, res) => {
   res.status(200).json(users)
 });
 
-router.post('/register', async (req, res) => {
+router.post('/users', async (req, res) => {
   const { email, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10)
   const user = await Users.create({

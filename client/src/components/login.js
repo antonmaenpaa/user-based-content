@@ -41,18 +41,13 @@ export default class Log extends Component {
 
     loginButton() {
         let users = this.state.users
-
-        console.log(users)
-        console.log(this.state.email)
-
         if (users[0].email === this.state.email && users[0].password === this.state.password) {
             this.setState({
                 redirect: true
             })
 
         } else {
-            alert('fuck u')
-            console.log("fuck u")
+            alert('Try again!')
         }
 
     }
