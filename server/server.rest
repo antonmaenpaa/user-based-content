@@ -35,8 +35,8 @@ POST http://localhost:5000/register
 Content-Type: application/json
 
 {
-    "email": "gustav",
-    "password": "1234567"
+    "email": "anton",
+    "password": "12345"
 }
 
 ###
