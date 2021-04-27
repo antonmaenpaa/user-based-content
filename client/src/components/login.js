@@ -104,7 +104,7 @@ const rootStyle = {
   display: "block",
   border: "1px solid black ",
   height: "25rem",
-  width: "30rem",
+  width: "50%",
   margin: "auto",
   boxShadow: "5px 5px",
   marginTop: "8rem",
@@ -118,19 +118,19 @@ const InputFieldName = {
   positon: "relative",
   display: "block",
   margin: "10px",
-  width: "15rem",
+  width: "80%",
   height: "1.5rem",
 };
 
 const InputFieldPassword = {
   positon: "relative",
-  width: "15rem",
+  width: "80%",
   height: "1.5rem",
 };
 
 const ButtonLogin = {
   display: "block",
-  width: "15.5rem",
+  width: "80%",
   height: "2rem",
   margin: "1rem",
   color: "white",

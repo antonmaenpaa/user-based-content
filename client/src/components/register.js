@@ -15,7 +15,6 @@ export default class Register extends Component {
         this.registerButton = this.registerButton.bind(this)
     }
 
-  
 
     async registerButton() {
 
@@ -30,6 +29,8 @@ export default class Register extends Component {
             });
             const data = await response.json()
             this.setState({
+                email: "",
+                password: "",
                 users: data
             })
 
@@ -47,9 +48,10 @@ export default class Register extends Component {
         } else {
             console.log("ERROR")
         }
-        
 
     }
+
+
 
     emailFieldRegister(e) {
         this.setState({
@@ -70,12 +72,12 @@ export default class Register extends Component {
     <div style={rootStyle}>
     <div style={form}>
         <h2 style={RegisText} >Please Register</h2>
-        <input style={InputFieldName} onChange={this.emailFieldRegister} value={this.state.email} placeholder="Email"/>
-        <input style={InputFieldPassword} onChange={this.passwordFieldRegister} value={this.state.password} placeholder="Password"/>
+        <input style={InputFieldName} onClick={this.clearInput}  onChange={this.emailFieldRegister} value={this.state.email} placeholder="Email"/>
+        <input style={InputFieldPassword} onClick={this.clearInput} ref={(el) => (this.password = el)} onChange={this.passwordFieldRegister} value={this.state.password} placeholder="Password"/>
         <button style={ButtonLogin} onClick={this.registerButton}> Register </button>
     </div>
     <div style={regConatiner}>
-        <p>If you have an account, please click below</p>
+        <p>If you have an account, please click below and login</p>
         <Link to="/login" style={ButtonReg}>
             <span> Login </span>
         </Link>
@@ -99,7 +101,7 @@ const rootStyle = {
     display: "block",
     border: "1px solid black ",
     height: "35rem",
-    width: "30rem",
+    width: "50%",
     margin: "auto",
     boxShadow: "5px 5px",
     marginTop: "5rem",
@@ -116,7 +118,7 @@ const InputFieldName = {
     positon: "relative",
     display: "block",
     margin: "5px",
-    width: "15rem",
+    width: "80%",
     height: "1.5rem"
 
 }
@@ -124,14 +126,14 @@ const InputFieldName = {
 const InputFieldPassword = {
     positon: "relative",
     margin: "5px",
-    width: "15rem",
+    width: "80%",
     height: "1.5rem"
 
 }
 
 const ButtonLogin = {
   display: "block",
-  width: "15.5rem",
+  width: "80%",
   height: "2rem",
   margin: "1rem",
   color: "white",
@@ -150,6 +152,8 @@ const regConatiner = {
     justifyContent: "center",
     alignItems: "center"
 }
+
+
 
 
 
