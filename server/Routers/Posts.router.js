@@ -39,7 +39,6 @@ router.delete("/posts/:id", userLoggedIn, async (req, res) => {
 
 });
 
-
 router.put("/posts/:id", userLoggedIn, async (req, res) => {
   const post = await Posts.findOne({ _id: req.params.id });
 
