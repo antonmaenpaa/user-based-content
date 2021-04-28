@@ -8,6 +8,6 @@ let UserSchema = new Schema({
   password: { type: String, required: true },
 });
 
-let Users = mongoose.model("Users", UserSchema); // Our DB - collection name is Users
+let Users = mongoose.model("users", UserSchema); // Our DB - collection name is Users
 
 module.exports = Users;

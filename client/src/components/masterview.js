@@ -1,5 +1,6 @@
 import Post from "./post";
 import React, { Component } from "react";
+// import Cookies from "js-cookie"
 
 class MasterView extends Component {
   constructor(props) {
@@ -37,7 +38,6 @@ class MasterView extends Component {
 
   // DELETE POST
   async deletePost(postId) {
-    console.log("DELETE");
     let body;
 
     const response = await fetch("/posts/" + postId, {
@@ -91,14 +91,12 @@ class MasterView extends Component {
   // ADD NEW POST
   async addNewPost(e) {
     e.preventDefault();
-
-    const userPostId = JSON.parse(localStorage.getItem('User'))
-
+    
     let body = {
       title: this.state.title,
       text: this.state.text,
-      id: userPostId
     };
+    
     const response = await fetch("/posts", {
       method: "POST",
       body: JSON.stringify(body),
@@ -110,8 +108,9 @@ class MasterView extends Component {
     await this.getAllPosts();
     this.setState({
       title: "",
-      text: "",
+      text: ""
     });
+
     return result;
   }
 
@@ -138,9 +137,11 @@ class MasterView extends Component {
           {this.state.posts.map((post, index) => (
             <div key={index} style={{ width: "95%" }} data-id={post._id}>
               <Post
+                posts={this.state.posts}
                 key={post._id}
                 title={post.title}
                 text={post.text}
+                creator={this.state.creator}
                 editPost={() => this.editPost(post._id, post.title, post.text)}
                 deletePost={() => this.deletePost(post._id)}
               />

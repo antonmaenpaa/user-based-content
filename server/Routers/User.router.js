@@ -3,26 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const mongo = require("mongodb");
 const Users = require("../DbModel/UserSchema");
-const cookieSession = require('cookie-session');
-
-
-
-// Creates a user
-
-router.use(cookieSession({
-    name: "session",
-    secret: "cr23ackc0d3",
-    secure: false,
-    maxAge: 1000 * 10,
-    httpOnly: true
-
-}));
-
-router.get('/users' ,async (req, res) => {
-
-  const users = await Users.find({})
-  res.status(200).json(users)
-});
+const userLoggedIn = require("../Middleware/secure");
 
 router.post('/users', async (req, res) => {
   const { email, password } = req.body;
@@ -36,6 +17,8 @@ router.post('/users', async (req, res) => {
   // bind to register input fields
 });
 
+router.post("/authenticated", userLoggedIn, (req, res) => res.status(200).json(null))
+
 router.post("/login", async (req, res) => {
   
   const { email, password } = req.body;
@@ -46,11 +29,12 @@ router.post("/login", async (req, res) => {
   console.log(foundUser)
 
   if(!foundUser || !await bcrypt.compare(password, foundUser.password)) {
-    res.status(404).json("USER NOT FOUND")
+    res.status(401).json("USER NOT FOUND")
     return
   }
 
-  req.session.username = foundUser._id
+  req.session.userId = foundUser._id
+  
 
   res.status(200).json(foundUser)
   // bind to login btn to validate and proceed to posts and show post form

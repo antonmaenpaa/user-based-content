@@ -27,6 +27,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // ask server if i am still logged in
      this.getUserFromLocalStorage();
   }
   
@@ -47,22 +48,21 @@ class App extends Component {
       loggedInUser: !this.state.loggedInUser,
     });
     return data;  
-  
-
-
     }
 
   getUserFromLocalStorage() {
-    let userId = localStorage.getItem("User");
+    let userId = localStorage.getItem("user");
 
     if (userId) {
       this.setState({
-        loggedInUser: !this.state.loggedInUser,
+        loggedInUser: !this.state.loggedInUser
       });
 
       return;
     }
   }
+
+
   render() {
     return (
       <BrowserRouter>
