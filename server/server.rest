@@ -12,17 +12,18 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:5000/posts/608028240340eb0a98452eb9
+DELETE http://localhost:5000/posts/608969382102e125e05b2c84
 
 ###
 
-PUT http://localhost:5000/posts/608028240340eb0a98452eb9
+PUT http://localhost:5000/posts/60896d19307f9d3c2c39d892
 Content-Type: application/json
 
 {
-    "title": "hej gustav",
+    "title": "hevsdfsd",
     "text": "hej gustav"
 }
+
 
 ###
 
@@ -35,8 +36,8 @@ POST http://localhost:5000/register
 Content-Type: application/json
 
 {
-    "email": "anton",
-    "password": "12345"
+    "email": "jacob",
+    "password": "123456"
 }
 
 ###
@@ -45,10 +46,15 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "email": "gustav",
-    "password": "1234567"
+    "email": "anton",
+    "password": "12345"
 }
 
 ###
 
 DELETE http://localhost:5000/logout
+
+###
+
+
+POST http://localhost:5000/authenticated

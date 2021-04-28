@@ -39,8 +39,6 @@ const rootStyle = {
     margin: "auto",
     boxShadow: "5px 5px",
     marginTop: "5rem",
-
-    
     overflowy: "hidden",
 }
 const RegisText = {
