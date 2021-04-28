@@ -22,11 +22,11 @@ router.post("/authenticated", userLoggedIn, (req, res) => res.status(200).json(n
 router.post("/login", async (req, res) => {
   
   const { email, password } = req.body;
-  // console.log(email, password)
+ 
  
   const users = await Users.find({});
   const foundUser = await users.find(user => user.email === email)
-  console.log(foundUser)
+  
 
   if(!foundUser || !await bcrypt.compare(password, foundUser.password)) {
     res.status(401).json("USER NOT FOUND")
