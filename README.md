@@ -1,7 +1,7 @@
 # Blogposts
 
 A simple application where u can create user, login and
-add, edit and delete your own blogposts.
+add, edit, delete your own blogposts.
 
 Created with React using vanilla javascript.
 
