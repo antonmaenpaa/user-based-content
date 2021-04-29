@@ -37,7 +37,7 @@ Content-Type: application/json
 
 {
     "email": "admin",
-    "password": "123",
+    "password": "",
     "role": "admin"
 }
 
