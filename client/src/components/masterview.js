@@ -11,7 +11,8 @@ class MasterView extends Component {
       text: "",
       showEditBtn: false,
       userId: "",
-      role: ""
+      role: "",
+      user: ""
     };
     this.deletePost = this.deletePost.bind(this);
     this.UpdateTitleFields = this.UpdateTitleFields.bind(this);
@@ -23,7 +24,6 @@ class MasterView extends Component {
 
   async componentDidMount() {
     this.getAllPosts();
-
     const response = await fetch("/authenticated", {
       method: "POST",
       headers: {

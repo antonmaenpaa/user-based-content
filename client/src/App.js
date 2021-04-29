@@ -20,8 +20,29 @@ class App extends Component {
     this.passwordField = this.passwordField.bind(this);
     this.emailField = this.emailField.bind(this);
     this.loginButton = this.loginButton.bind(this);
+    this.getUserFromLocalStorage = this.getUserFromLocalStorage.bind(this);
 
   }
+
+    componentDidMount(){
+      this.getUserFromLocalStorage()
+    }
+
+ getUserFromLocalStorage() {
+    let userStorage = localStorage.getItem("user");
+
+    if (userStorage) {
+      this.setState({
+        loggedInUser: !this.state.loggedInUser,
+        user: userStorage
+      });
+      
+
+      return;
+    }
+  }
+
+
 
   async logOut() {
     let body
