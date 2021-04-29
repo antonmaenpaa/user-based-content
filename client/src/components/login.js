@@ -2,19 +2,21 @@ import { Link, Redirect } from 'react-router-dom';
 import React, { Component } from 'react';
 
 export default class Log extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: '',
-            password: '',
-            errors: {},
-            redirect: false,
-            user: [],
-        };
-        this.passwordField = this.passwordField.bind(this);
-        this.emailField = this.emailField.bind(this);
-        this.loginButton = this.loginButton.bind(this);
-    }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: "",
+      errors: {},
+      redirect: false,
+      user: [],
+    
+    };
+    this.passwordField = this.passwordField.bind(this);
+    this.emailField = this.emailField.bind(this);
+    this.loginButton = this.loginButton.bind(this);
+  }
 
     async loginButton() {
         let body = {

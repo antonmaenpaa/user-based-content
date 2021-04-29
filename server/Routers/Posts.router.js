@@ -7,10 +7,10 @@ const mongo = require("mongodb");
 const router = express.Router();
 
 router.get("/posts", async (req, res) => {
-  const docs = await Posts.find({}).populate("user").select("-user.password").exec();
+  const docs = await Posts.find({}).populate("user", "-password")
   res.status(200).json(docs);
-  // bind to componentDidMount
 });
+
 
 router.post("/posts", userLoggedIn, async (req, res) => {
   const post = { ...req.body, user: req.session.userId }

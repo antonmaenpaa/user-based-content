@@ -138,7 +138,7 @@ class MasterView extends Component {
       },
     });
     const result = await response.json();
-    // console.log(result)
+    console.log(result)
     this.setState({
       posts: result,
     });
