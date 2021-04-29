@@ -10,6 +10,7 @@ export default class Log extends Component {
       errors: {},
       redirect: false,
       user: [],
+    
     };
     this.passwordField = this.passwordField.bind(this);
     this.emailField = this.emailField.bind(this);
