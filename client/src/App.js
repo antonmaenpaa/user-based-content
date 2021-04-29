@@ -18,7 +18,6 @@ class App extends Component {
     };
 
     this.logOut = this.logOut.bind(this);
-    this.getUserFromLocalStorage = this.getUserFromLocalStorage.bind(this);
     this.passwordField = this.passwordField.bind(this);
     this.emailField = this.emailField.bind(this);
     this.loginButton = this.loginButton.bind(this);
@@ -26,9 +25,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // ask server if i am still logged in
-     this.getUserFromLocalStorage();
+
   }
+
 
   async logOut() {
     let body
@@ -49,19 +48,8 @@ class App extends Component {
     return data;  
     }
 
-  getUserFromLocalStorage() {
-    let userStorage = localStorage.getItem("user");
 
-    if (userStorage) {
-      this.setState({
-        loggedInUser: !this.state.loggedInUser,
-        user: userStorage
-      });
-      
-
-      return;
-    }
-  }
+  
 
       passwordField(e) {
         this.setState({
@@ -89,15 +77,18 @@ class App extends Component {
         });
         const data = await response.json();
         localStorage.setItem('user', data.email);
+        let userStorage = localStorage.getItem("user");
 
         if (data !== 'USER NOT FOUND') {
             this.setState({
-                loggedInUser: !this.state.loggedInUser
+                loggedInUser: !this.state.loggedInUser,
+                user: userStorage
             });
         }
     }
 
   render() {
+    console.log(this.state.user)
     return (
       <BrowserRouter>
         <div style={rootStyle}>
