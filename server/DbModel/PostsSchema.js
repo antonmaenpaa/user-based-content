@@ -6,7 +6,7 @@ let Schema = mongoose.Schema;
 let PostsSchema = new Schema({
   title: { type: String, required: true },
   text: { type: String, required: true },
-  user: { type: Schema.Types.ObjectId, ref: "users", required: true }
+  user: { type: Schema.Types.ObjectId, ref: "users", required: true },
 });
 
 let Posts = mongoose.model("posts", PostsSchema); // Our DB - collections name is 'posts'

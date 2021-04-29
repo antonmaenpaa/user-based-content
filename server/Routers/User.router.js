@@ -5,19 +5,20 @@ const mongo = require("mongodb");
 const Users = require("../DbModel/UserSchema");
 const userLoggedIn = require("../Middleware/secure");
 
-router.post('/users', async (req, res) => {
+router.post('/register', async (req, res) => {
   const { email, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10)
   const user = await Users.create({
     email: req.body.email,
     password: hashedPassword,
+    role: "noob"
   }) 
 
   res.status(201).json(user)
   // bind to register input fields
 });
 
-router.post("/authenticated", userLoggedIn, (req, res) => res.status(200).json(req.session.email))
+router.post("/authenticated", userLoggedIn, (req, res) => res.status(200).json({email: req.session.email, role: req.session.role}))
 
 router.post("/login", async (req, res) => {
   
@@ -35,6 +36,7 @@ router.post("/login", async (req, res) => {
 
   req.session.userId = foundUser._id
   req.session.email = foundUser.email
+  req.session.role = foundUser.role
   
 
   res.status(200).json(foundUser)
@@ -47,5 +49,21 @@ router.delete("/logout", (req,res) => {
   // bind to logout btn
 });
 
+// check if user is logged in and return user info
+// router.get('/api/users/authenticate', checkLogin, (req, res) => {
+//     res.status(200).json({
+//         username: req.session.username,
+//         access: req.session.role,
+//         avatar: req.session.avatar
+//     })
+// })
+
+// function checkLogin(req, res, next) {
+//     if(req.session.username) {
+//         next()   
+//     } else {
+//         res.status(401).json(null)
+//     }
+//   }
 
 module.exports = router;
