@@ -1,6 +1,8 @@
+
 import React, { Component } from "react";
 
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
 
 class Header extends Component {
   constructor(props) {
@@ -35,24 +37,24 @@ class Header extends Component {
     );
     
   }
+
+
 }
 
-
-
 const rootStyle = {
-  display: "flex",
-  justifyContent: "space-between",
-  padding: "0 2rem",
-  background: "black",
-  position: "sticky",
-  left: 0,
-  right: 0,
-  top: 0,
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '0 2rem',
+    background: 'black',
+    position: 'sticky',
+    left: 0,
+    right: 0,
+    top: 0,
 };
 
 const linkStyle = {
-  textDecoration: "none",
-  color: "white",
+    textDecoration: 'none',
+    color: 'white',
 };
 
 export default Header;
