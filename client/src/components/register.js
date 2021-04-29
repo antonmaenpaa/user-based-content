@@ -44,6 +44,7 @@ export default class Register extends Component {
             this.setState({
                 users: NewUsers
             })
+            console.log("You are now registerd!" + NewUsers)
             return NewUsers
         } else {
             console.log("ERROR")
@@ -76,12 +77,18 @@ export default class Register extends Component {
         <input style={InputFieldPassword} onClick={this.clearInput} ref={(el) => (this.password = el)} onChange={this.passwordFieldRegister} value={this.state.password} placeholder="Password"/>
         <button style={ButtonLogin} onClick={this.registerButton}> Register </button>
     </div>
+    {this.NewUsers ? (
+            <div style={Tooltip}>You are now registerd! <br/> Please  <Link to="/login" style={ButtonReg}>
+            <span> Login </span>
+        </Link></div>
+        ) : (
     <div style={regConatiner}>
         <p>If you have an account, please click below and login</p>
         <Link to="/login" style={ButtonReg}>
             <span> Login </span>
         </Link>
     </div>
+        )}
 </div>
    )
     }
@@ -96,6 +103,12 @@ const form = {
 
  
 }
+
+const Tooltip = {
+   backgroundColor: "blue",
+   width: "30%",
+}
+
 const rootStyle = {
     padding: "0 1rem",
     display: "block",
