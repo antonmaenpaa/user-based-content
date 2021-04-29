@@ -31,10 +31,11 @@ export default class Log extends Component {
     });
     const data = await response.json();
     localStorage.setItem("user", data.email);
-
-    this.setState({
-      redirect: true,
-    });
+      
+      this.setState({
+        redirect: true,
+      });
+    
   }
 
   emailField(e) {

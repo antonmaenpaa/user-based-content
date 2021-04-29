@@ -12,7 +12,7 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:5000/posts/608969382102e125e05b2c84
+DELETE http://localhost:5000/posts/608aaa8307bcd11fae2fd812
 
 ###
 
@@ -36,8 +36,9 @@ POST http://localhost:5000/register
 Content-Type: application/json
 
 {
-    "email": "connor",
-    "password": "123"
+    "email": "admin",
+    "password": "123",
+    "role": "admin"
 }
 
 ###
@@ -46,8 +47,8 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "email": "anton",
-    "password": "12345"
+    "email": "admin",
+    "password": "123"
 }
 
 ###

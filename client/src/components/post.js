@@ -19,11 +19,12 @@ class Post extends Component {
   render() {
 
     const userStorage = localStorage.getItem('user')
+    // console.log(this.props.admin)
    
     return (
       <div style={rootStyle}>
         {
-          userStorage === this.props.name && (
+          userStorage === this.props.name | this.props.admin === "admin" ? (
           <>
           <MdModeEdit
             style={{ fontSize: "1.5rem", marginRight: "1rem", cursor: "pointer" }}
@@ -35,12 +36,14 @@ class Post extends Component {
           />
           </>
 
+          ) : (
+            <></>
           )
         }
  
-          <h4 type="title">{this.props.title}</h4>
-          <p type="text">{this.props.text}</p>
-          <p>{this.props.name}'s post</p>
+            <h4 type="title">{this.props.title}</h4>
+            <p type="text">{this.props.text}</p>
+            <p>{this.props.name}'s post</p>
 
 
       </div>

@@ -12,6 +12,7 @@ class App extends Component {
     this.state = {
       loggedInUser: false,
       userLoggedIn: "",
+      user: ""
     };
 
     this.logOut = this.logOut.bind(this);
@@ -30,8 +31,7 @@ class App extends Component {
     // ask server if i am still logged in
      this.getUserFromLocalStorage();
   }
-  
-  
+
   async logOut() {
     let body
     const response = await fetch("/logout", {
@@ -46,17 +46,20 @@ class App extends Component {
     window.localStorage.clear();
     this.setState({
       loggedInUser: !this.state.loggedInUser,
+      user: ""
     });
     return data;  
     }
 
   getUserFromLocalStorage() {
-    let userId = localStorage.getItem("user");
+    let userStorage = localStorage.getItem("user");
 
-    if (userId) {
+    if (userStorage) {
       this.setState({
-        loggedInUser: !this.state.loggedInUser
+        loggedInUser: !this.state.loggedInUser,
+        user: userStorage
       });
+      
 
       return;
     }
@@ -67,7 +70,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div style={rootStyle}>
-          <Header loggedInUser={this.state.loggedInUser} logOut={this.logOut} />
+          <Header loggedInUser={this.state.loggedInUser} logOut={this.logOut} user={this.state.user}/>
           <Switch>
             <Route exact path="/">
               <MasterView loggedInUser={this.state.loggedInUser} />

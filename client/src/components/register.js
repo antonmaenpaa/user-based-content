@@ -20,7 +20,7 @@ export default class Register extends Component {
 
         try {
             let body = {email: this.state.email, password: this.state.password}
-            const response = await fetch("/users", {
+            const response = await fetch("/register", {
                 method: "POST",
                 body: JSON.stringify(body),
                 headers: {
