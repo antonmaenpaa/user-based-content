@@ -11,7 +11,6 @@ class App extends Component {
     super(props);
     this.state = {
       loggedInUser: false,
-      userLoggedIn: "",
       user: "",
       password: "",
       email: ""
@@ -24,11 +23,6 @@ class App extends Component {
 
   }
 
-  componentDidMount() {
-
-  }
-
-
   async logOut() {
     let body
     const response = await fetch("/logout", {
@@ -39,7 +33,6 @@ class App extends Component {
       },
     });
     const data = await response.json();
-    console.log(data)
     window.localStorage.clear();
     this.setState({
       loggedInUser: !this.state.loggedInUser,
@@ -48,51 +41,50 @@ class App extends Component {
     return data;  
     }
 
+    passwordField(e) {
+      this.setState({
+        password: e.target.value,
+      });
+    }
 
-  
+    emailField(e) {
+      this.setState({
+        email: e.target.value,
+      });
+    }
 
-      passwordField(e) {
+    async loginButton() {
+    let body = {
+        email: this.state.email,
+        password: this.state.password,
+    };
+    const response = await fetch('/login', {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+    const data = await response.json();
+    localStorage.setItem('user', data.email);
+    let userStorage = localStorage.getItem("user");
+
+    if (data !== 'USER NOT FOUND') {
         this.setState({
-            password: e.target.value,
+            loggedInUser: !this.state.loggedInUser,
+            user: userStorage
         });
     }
-
-        emailField(e) {
-        this.setState({
-            email: e.target.value,
-        });
-    }
-
-       async loginButton() {
-        let body = {
-            email: this.state.email,
-            password: this.state.password,
-        };
-        const response = await fetch('/login', {
-            method: 'POST',
-            body: JSON.stringify(body),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        const data = await response.json();
-        localStorage.setItem('user', data.email);
-        let userStorage = localStorage.getItem("user");
-
-        if (data !== 'USER NOT FOUND') {
-            this.setState({
-                loggedInUser: !this.state.loggedInUser,
-                user: userStorage
-            });
-        }
-    }
+}
 
   render() {
-    console.log(this.state.user)
     return (
       <BrowserRouter>
         <div style={rootStyle}>
-          <Header loggedInUser={this.state.loggedInUser} logOut={this.logOut} user={this.state.user}/>
+          <Header 
+          loggedInUser={this.state.loggedInUser} 
+          logOut={this.logOut} 
+          user={this.state.user}/>
           <Switch>
             <Route exact path="/">
               <MasterView loggedInUser={this.state.loggedInUser} />
