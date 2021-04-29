@@ -11,7 +11,7 @@ export default class Log extends Component {
       errors: {},
       redirect: false,
       user: [],
-    
+      
     };
     this.passwordField = this.passwordField.bind(this);
     this.emailField = this.emailField.bind(this);
@@ -34,11 +34,15 @@ export default class Log extends Component {
         localStorage.setItem('user', data.email);
         console.log(data);
 
-        if (data !== 'USER NOT FOUND') {
+        if (data !== 'USER NOT FOUND' ) {
             console.log('login');
+            
             this.setState({
                 redirect: true,
+                 
             });
+        } else {
+            return console.error();
         }
     }
     emailField(e) {
@@ -53,10 +57,11 @@ export default class Log extends Component {
     }
 
     render() {
-        if (this.state.redirect) {
-            return <Redirect to="/" />;
-        }
-        return (
+        if (this.state.redirect) {     
+            return <Redirect to="/"/>
+        } 
+  
+    return (
             <div style={rootStyle}>
                 <div style={form}>
                     <h2 style={LoginText}>Please login</h2>
@@ -92,6 +97,7 @@ export default class Log extends Component {
                     </Link>
                 </div>
             </div>
+                    
         );
     }
 }

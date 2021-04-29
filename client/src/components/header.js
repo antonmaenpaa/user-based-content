@@ -13,7 +13,8 @@ function Header(props) {
                 <Link style={linkStyle} to="/">
                     <h2 onClick={props.logOut}>Logout</h2>
                 </Link>
-            ) : (
+            ) :  (
+               
                 <Link style={linkStyle} to="/login">
                     <h2>Login</h2>
                 </Link>
