@@ -89,10 +89,8 @@ class App extends Component {
         });
         const data = await response.json();
         localStorage.setItem('user', data.email);
-        console.log(data);
 
         if (data !== 'USER NOT FOUND') {
-            console.log('login');
             this.setState({
                 loggedInUser: !this.state.loggedInUser
             });

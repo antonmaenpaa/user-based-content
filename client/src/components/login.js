@@ -6,9 +6,6 @@ export default class Log extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      errors: {},
-      redirect: false,
-      user: [],
     
     };
   }
