@@ -39,7 +39,6 @@ export default class Log extends Component {
             });
         }
     }
-
     emailField(e) {
         this.setState({
             email: e.target.value,
