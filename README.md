@@ -3,7 +3,11 @@
 A simple application where u can create user, login and
 add, edit, delete your own blogposts.
 
-Created with React using vanilla javascript.
+Created with MongoDB, Express.js, React.js and Node.js.
+
+To use admin: 
+email: admin
+password: 123
 
 ## Run these commands when cloning this project
 
