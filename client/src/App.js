@@ -11,7 +11,7 @@ class App extends Component {
     super(props);
     this.state = {
       loggedInUser: false,
-      userLoggedIn: "",
+      userLoggedIn: this.props.userLoggedIn,
       user: ""
     };
 
@@ -42,7 +42,6 @@ class App extends Component {
       },
     });
     const data = await response.json();
-    console.log(data)
     window.localStorage.clear();
     this.setState({
       loggedInUser: !this.state.loggedInUser,

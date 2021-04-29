@@ -11,6 +11,7 @@ export default class Log extends Component {
       errors: {},
       redirect: false,
       user: [],
+
       
     };
     this.passwordField = this.passwordField.bind(this);
@@ -38,9 +39,9 @@ export default class Log extends Component {
             console.log('login');
             
             this.setState({
-                redirect: true,
-                 
-            });
+                redirect: true
+            })
+     
         } else {
             return console.error();
         }
