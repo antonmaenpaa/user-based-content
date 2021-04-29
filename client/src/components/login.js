@@ -9,37 +9,33 @@ export default class Log extends Component {
       password: "",
       errors: {},
       redirect: false,
-      user: []
-
+      user: [],
     };
     this.passwordField = this.passwordField.bind(this);
     this.emailField = this.emailField.bind(this);
     this.loginButton = this.loginButton.bind(this);
   }
 
-
   async loginButton() {
-    
-      let body = {
-        email: this.state.email,
-        password: this.state.password
-      }
-      const response = await fetch("/login", {
-        method: "POST",
-        body: JSON.stringify(body),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      console.log(data)
-    
-        this.setState({
-          redirect: true
-        });
+    let body = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+    const response = await fetch("/login", {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    localStorage.setItem("user", data.email);
 
-      }
- 
+    this.setState({
+      redirect: true,
+    });
+  }
+
   emailField(e) {
     this.setState({
       email: e.target.value,
@@ -52,7 +48,7 @@ export default class Log extends Component {
   }
 
   render() {
-      if (this.state.redirect === true) {
+    if (this.state.redirect === true) {
       return <Redirect to="/" />;
     }
     return (
@@ -70,14 +66,18 @@ export default class Log extends Component {
             onChange={this.passwordField}
             value={this.state.password}
             placeholder="Password"
+            type="password"
           />
-          <button style={ButtonLogin} value={this} onClick={() => {
-            this.loginButton();
-            this.props.loggedInUser();
-            }}>
+          <button
+            style={ButtonLogin}
+            value={this}
+            onClick={() => {
+              this.loginButton();
+              this.props.loggedInUser();
+            }}
+          >
             {" "}
-            Login
-            {" "}
+            Login{" "}
           </button>
         </div>
         <div style={regConatiner}>

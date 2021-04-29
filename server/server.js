@@ -6,6 +6,15 @@ const path = require("path");
 const mongoose = require("mongoose");
 const PostsRouter = require("./Routers/Posts.router");
 const UsersRouter = require("./Routers/User.router");
+const cookieSession = require('cookie-session');
+
+app.use(cookieSession({
+    name: "session",
+    secret: "cr23ackc0d3",
+    secure: false,
+    // maxAge: 1000 * 60 * 10, // 10 min
+    httpOnly: true
+}));
 
 app.use(express.json());
 

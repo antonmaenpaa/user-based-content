@@ -4,10 +4,11 @@ let mongoose = require("mongoose");
 let Schema = mongoose.Schema;
 
 let PostsSchema = new Schema({
-  title: String,
-  text: String,
+  title: { type: String, required: true },
+  text: { type: String, required: true },
+  user: { type: Schema.Types.ObjectId, ref: "users", required: true }
 });
 
-let Posts = mongoose.model("Posts", PostsSchema); // Our DB - collections name is ' Posts'
+let Posts = mongoose.model("posts", PostsSchema); // Our DB - collections name is 'posts'
 
 module.exports = Posts;
