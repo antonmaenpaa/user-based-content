@@ -17,7 +17,7 @@ router.post('/users', async (req, res) => {
   // bind to register input fields
 });
 
-router.post("/authenticated", userLoggedIn, (req, res) => res.status(200).json(null))
+router.post("/authenticated", userLoggedIn, (req, res) => res.status(200).json(req.session.email))
 
 router.post("/login", async (req, res) => {
   
@@ -34,6 +34,7 @@ router.post("/login", async (req, res) => {
   }
 
   req.session.userId = foundUser._id
+  req.session.email = foundUser.email
   
 
   res.status(200).json(foundUser)
