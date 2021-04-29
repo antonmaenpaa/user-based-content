@@ -1,26 +1,44 @@
-import React from 'react';
+
+import React, { Component } from "react";
 
 import { Link } from 'react-router-dom';
 
-function Header(props) {
-    return (
-        <div style={rootStyle}>
-            <Link style={linkStyle} to="/">
-                <h2>Blogposts</h2>
-            </Link>
 
-            {props.loggedInUser === true ? (
-                <Link style={linkStyle} to="/">
-                    <h2 onClick={props.logOut}>Logout</h2>
-                </Link>
-            ) :  (
-               
-                <Link style={linkStyle} to="/login">
-                    <h2>Login</h2>
-                </Link>
-            )}
-        </div>
+class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+
+    }
+  }
+  async componentDidMount() {
+
+  }
+
+  render() {
+
+    return (
+      <div style={rootStyle}>
+        <Link style={linkStyle} to="/">
+          <h2>Blogposts</h2>
+        </Link>
+        <h2 style={{color: "white"}}>{this.props.user}</h2>
+  
+        {this.props.loggedInUser === true ? (
+          <Link style={linkStyle} to="/">
+            <h2 onClick={this.props.logOut}>Logout</h2>
+          </Link>
+        ) : (
+          <Link style={linkStyle} to="/login">
+            <h2>Login</h2>
+          </Link>
+        )}
+      </div>
     );
+    
+  }
+
+
 }
 
 const rootStyle = {
