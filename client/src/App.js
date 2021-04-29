@@ -12,19 +12,17 @@ class App extends Component {
     this.state = {
       loggedInUser: false,
       userLoggedIn: "",
-      user: ""
+      user: "",
+      password: "",
+      email: ""
     };
 
     this.logOut = this.logOut.bind(this);
     this.getUserFromLocalStorage = this.getUserFromLocalStorage.bind(this);
-    this.login = this.login.bind(this);
-  }
+    this.passwordField = this.passwordField.bind(this);
+    this.emailField = this.emailField.bind(this);
+    this.loginButton = this.loginButton.bind(this);
 
-
-  login() {
-    this.setState({
-      loggedInUser: !this.state.loggedInUser
-    })
   }
 
   componentDidMount() {
@@ -65,6 +63,41 @@ class App extends Component {
     }
   }
 
+      passwordField(e) {
+        this.setState({
+            password: e.target.value,
+        });
+    }
+
+        emailField(e) {
+        this.setState({
+            email: e.target.value,
+        });
+    }
+
+       async loginButton() {
+        let body = {
+            email: this.state.email,
+            password: this.state.password,
+        };
+        const response = await fetch('/login', {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await response.json();
+        localStorage.setItem('user', data.email);
+        console.log(data);
+
+        if (data !== 'USER NOT FOUND') {
+            console.log('login');
+            this.setState({
+                loggedInUser: !this.state.loggedInUser
+            });
+        }
+    }
 
   render() {
     return (
@@ -76,7 +109,14 @@ class App extends Component {
               <MasterView loggedInUser={this.state.loggedInUser} />
             </Route>
             <Route path="/login">
-              <Login loggedInUser={this.login} />
+              <Login 
+              loginButton={this.loginButton}
+              passwordField={(e) => this.passwordField(e)} 
+              emailField={e => this.emailField(e)}
+              password={this.state.password}
+              email={this.state.email}
+              loggedInUser={this.state.loggedInUser}
+              />
             </Route>
             <Route path="/register">
               <Register />

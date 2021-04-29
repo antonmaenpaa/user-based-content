@@ -6,54 +6,19 @@ export default class Log extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: "",
       errors: {},
       redirect: false,
       user: [],
     
     };
-    this.passwordField = this.passwordField.bind(this);
-    this.emailField = this.emailField.bind(this);
-    this.loginButton = this.loginButton.bind(this);
   }
 
-    async loginButton() {
-        let body = {
-            email: this.state.email,
-            password: this.state.password,
-        };
-        const response = await fetch('/login', {
-            method: 'POST',
-            body: JSON.stringify(body),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-        const data = await response.json();
-        localStorage.setItem('user', data.email);
-        console.log(data);
+ 
 
-        if (data !== 'USER NOT FOUND') {
-            console.log('login');
-            this.setState({
-                redirect: true,
-            });
-        }
-    }
-    emailField(e) {
-        this.setState({
-            email: e.target.value,
-        });
-    }
-    passwordField(e) {
-        this.setState({
-            password: e.target.value,
-        });
-    }
+
 
     render() {
-        if (this.state.redirect) {
+        if (this.props.loggedInUser) {
             return <Redirect to="/" />;
         }
         return (
@@ -62,14 +27,14 @@ export default class Log extends Component {
                     <h2 style={LoginText}>Please login</h2>
                     <input
                         style={InputFieldName}
-                        onChange={this.emailField}
-                        value={this.state.email}
+                        onChange={(e) => this.props.emailField(e)}
+                        value={this.props.email}
                         placeholder="Email"
                     />
                     <input
                         style={InputFieldPassword}
-                        onChange={this.passwordField}
-                        value={this.state.password}
+                        onChange={(e) => this.props.passwordField(e)}
+                        value={this.props.password}
                         placeholder="Password"
                         type="password"
                     />
@@ -77,8 +42,7 @@ export default class Log extends Component {
                         style={ButtonLogin}
                         value={this}
                         onClick={() => {
-                            this.loginButton();
-                            this.props.loggedInUser();
+                            this.props.loginButton();
                         }}
                     >
                         {' '}
