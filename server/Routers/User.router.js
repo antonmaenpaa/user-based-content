@@ -8,6 +8,9 @@ const userLoggedIn = require("../Middleware/secure");
 router.post('/register', async (req, res) => {
   const { email, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10)
+ if(req.body.email === "" || req.body.password === "") {
+   return res.status(400).json('You have to fill in the empty fields')
+ }
   const user = await Users.create({
     email: req.body.email,
     password: hashedPassword,

@@ -28,6 +28,9 @@ export default class Register extends Component {
                 }
             });
             const data = await response.json()
+            if(this.state.email === "" || this.state.password === "") {
+                return alert('Fill in the empty fields')
+            }
             this.setState({
                 email: "",
                 password: "",
@@ -74,8 +77,8 @@ export default class Register extends Component {
     <div style={rootStyle}>
     <div style={form}>
         <h2 style={RegisText} >Please Register</h2>
-        <input style={InputFieldName} onClick={this.clearInput}  onChange={this.emailFieldRegister} value={this.state.email} placeholder="Email"/>
-        <input style={InputFieldPassword} onClick={this.clearInput} ref={(el) => (this.password = el)} onChange={this.passwordFieldRegister} value={this.state.password} placeholder="Password"/>
+        <input style={InputFieldName} onClick={this.clearInput}  onChange={this.emailFieldRegister} value={this.state.email} placeholder="Email" required/>
+        <input style={InputFieldPassword} onClick={this.clearInput} ref={(el) => (this.password = el)} onChange={this.passwordFieldRegister} value={this.state.password} placeholder="Password" type="password" required/>
         <button style={ButtonLogin} onClick={this.registerButton}> Register </button>
     </div>
     <div style={regConatiner}>
