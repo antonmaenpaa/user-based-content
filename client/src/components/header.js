@@ -1,6 +1,6 @@
-import React from "react";
+import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 
-import { Link } from "react-router-dom";
 
 function Header(props) {
   return (
@@ -23,8 +23,6 @@ function Header(props) {
     </div>
   );
 }
-
-
 
 const rootStyle = {
   // display: "sticky",

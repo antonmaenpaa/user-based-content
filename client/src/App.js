@@ -11,27 +11,39 @@ class App extends Component {
     super(props);
     this.state = {
       loggedInUser: false,
-      userLoggedIn: "",
+      user: "",
+      password: "",
+      username: ""
     };
 
     this.logOut = this.logOut.bind(this);
+    this.passwordField = this.passwordField.bind(this);
+    this.usernameField = this.usernameField.bind(this);
+    this.loginButton = this.loginButton.bind(this);
     this.getUserFromLocalStorage = this.getUserFromLocalStorage.bind(this);
-    this.login = this.login.bind(this);
+
+  }
+
+    componentDidMount(){
+      this.getUserFromLocalStorage()
+    }
+
+ getUserFromLocalStorage() {
+    let userStorage = localStorage.getItem("user");
+
+    if (userStorage) {
+      this.setState({
+        loggedInUser: !this.state.loggedInUser,
+        user: userStorage
+      });
+      
+
+      return;
+    }
   }
 
 
-  login() {
-    this.setState({
-      loggedInUser: !this.state.loggedInUser
-    })
-  }
 
-  componentDidMount() {
-    // ask server if i am still logged in
-     this.getUserFromLocalStorage();
-  }
-  
-  
   async logOut() {
     let body
     const response = await fetch("/logout", {
@@ -42,38 +54,71 @@ class App extends Component {
       },
     });
     const data = await response.json();
-    console.log(data)
     window.localStorage.clear();
     this.setState({
       loggedInUser: !this.state.loggedInUser,
+      user: ""
     });
     return data;  
     }
 
-  getUserFromLocalStorage() {
-    let userId = localStorage.getItem("user");
-
-    if (userId) {
+    passwordField(e) {
       this.setState({
-        loggedInUser: !this.state.loggedInUser
+        password: e.target.value,
       });
-
-      return;
     }
-  }
 
+    usernameField(e) {
+      this.setState({
+        username: e.target.value,
+      });
+    }
+
+    async loginButton() {
+    let body = {
+        username: this.state.username,
+        password: this.state.password,
+    };
+    const response = await fetch('/login', {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+    const data = await response.json();
+    localStorage.setItem('user', data.username);
+    let userStorage = localStorage.getItem("user");
+
+    if (data !== 'USER NOT FOUND') {
+        this.setState({
+            loggedInUser: !this.state.loggedInUser,
+            user: userStorage
+        });
+    }
+}
 
   render() {
     return (
       <BrowserRouter>
         <div style={rootStyle}>
-          <Header loggedInUser={this.state.loggedInUser} logOut={this.logOut} />
+          <Header 
+          loggedInUser={this.state.loggedInUser} 
+          logOut={this.logOut} 
+          user={this.state.user}/>
           <Switch>
             <Route exact path="/">
               <MasterView loggedInUser={this.state.loggedInUser} />
             </Route>
             <Route path="/login">
-              <Login loggedInUser={this.login} />
+              <Login 
+              loginButton={this.loginButton}
+              passwordField={(e) => this.passwordField(e)} 
+              usernameField={(e) => this.usernameField(e)}
+              password={this.state.password}
+              username={this.state.username}
+              loggedInUser={this.state.loggedInUser}
+              />
             </Route>
             <Route path="/register">
               <Register />

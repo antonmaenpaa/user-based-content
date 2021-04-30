@@ -6,12 +6,12 @@ export default class Register extends Component {
     constructor(props){
         super(props)
         this.state = {
-            email: "",
+            username: "",
             password: "",
             users: [],
         }
         this.passwordFieldRegister = this.passwordFieldRegister.bind(this)
-        this.emailFieldRegister = this.emailFieldRegister.bind(this)
+        this.usernameFieldRegister = this.usernameFieldRegister.bind(this)
         this.registerButton = this.registerButton.bind(this)
     }
 
@@ -19,8 +19,8 @@ export default class Register extends Component {
     async registerButton() {
 
         try {
-            let body = {email: this.state.email, password: this.state.password}
-            const response = await fetch("/users", {
+            let body = {username: this.state.username, password: this.state.password}
+            const response = await fetch("/register", {
                 method: "POST",
                 body: JSON.stringify(body),
                 headers: {
@@ -28,8 +28,11 @@ export default class Register extends Component {
                 }
             });
             const data = await response.json()
+            if(this.state.username === "" || this.state.password === "") {
+                return alert('Fill in the empty fields')
+            }
             this.setState({
-                email: "",
+                username: "",
                 password: "",
                 users: data
             })
@@ -40,7 +43,7 @@ export default class Register extends Component {
         }
 
         let NewUsers = this.state.users
-        if (NewUsers.email && NewUsers.password ) {
+        if (NewUsers.username && NewUsers.password ) {
             this.setState({
                 users: NewUsers
             })
@@ -55,9 +58,9 @@ export default class Register extends Component {
 
 
 
-    emailFieldRegister(e) {
+    usernameFieldRegister(e) {
         this.setState({
-            email: e.target.value
+            username: e.target.value
         })
 
     }
@@ -74,8 +77,8 @@ export default class Register extends Component {
     <div style={rootStyle}>
     <div style={form}>
         <h2 style={RegisText} >Please Register</h2>
-        <input style={InputFieldName} onClick={this.clearInput}  onChange={this.emailFieldRegister} value={this.state.email} placeholder="Email"/>
-        <input style={InputFieldPassword} onClick={this.clearInput} ref={(el) => (this.password = el)} onChange={this.passwordFieldRegister} value={this.state.password} placeholder="Password"/>
+        <input style={InputFieldName} onClick={this.clearInput}  onChange={this.usernameFieldRegister} value={this.state.username} placeholder="username" required/>
+        <input style={InputFieldPassword} onClick={this.clearInput} ref={(el) => (this.password = el)} onChange={this.passwordFieldRegister} value={this.state.password} placeholder="Password" type="password" required/>
         <button style={ButtonLogin} onClick={this.registerButton}> Register </button>
     </div>
     <div style={regConatiner}>

@@ -4,8 +4,9 @@ let mongoose = require("mongoose");
 let Schema = mongoose.Schema;
 
 let UserSchema = new Schema({
-  email: { type: String, required: true },
+  username: { type: String, required: true },
   password: { type: String, required: true },
+  role: String
 });
 
 let Users = mongoose.model("users", UserSchema); // Our DB - collection name is Users

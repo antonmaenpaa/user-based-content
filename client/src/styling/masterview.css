@@ -1,0 +1,30 @@
+
+.postContainer {
+    display: flex;
+    width: "100%";
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100%;
+}
+
+.mainPostContainer  {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+  };
+
+  .postDiv {
+     min-width: 80%;
+  }
+
+  @media (max-width: 40em) {
+    .postDiv {
+        min-width: 90%;
+    }
+  }

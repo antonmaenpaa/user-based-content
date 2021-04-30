@@ -1,0 +1,67 @@
+.rootStyle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    border-radius: .5rem;
+    margin: .5rem;
+    padding: .5rem 2rem;
+    text-align: center;
+    -webkit-box-shadow: 1px 1px 5px 0px rgba(139,69,19,0.75);
+    -moz-box-shadow: 1px 1px 5px 0px rgba(139,69,19,0.75);
+    box-shadow: 1px 1px 5px 0px rgba(139,69,19,0.75);
+    transition: box-shadow .2s;
+}
+
+.rootStyle:hover {
+    -webkit-box-shadow: 1px 1px 10px 0px rgba(139,69,19,0.75);
+    -moz-box-shadow: 1px 1px 10px 0px rgba(139,69,19,0.75);
+    box-shadow: 1px 1px 10px 0px rgba(139,69,19,0.75);
+}
+
+.icons {
+    display: flex;
+    flex-direction: row;
+}
+
+.text {
+    color: rgba(139,69,19,0.75);
+}
+
+.title {
+    color: rgba(139,69,19,0.75);
+}
+
+.titleUnderline {
+    width: 4rem;
+    height: .05rem;
+    background: rgba(139,69,19,0.75);
+    margin-top: -1rem;
+    border-radius: 1rem;
+}
+
+.editIcon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    color: rgba(139,69,19,0.9);
+    transition: transform .2s
+}
+
+.editIcon:hover {
+    transform: scale(1.1)
+}
+
+.deleteIcon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: rgba(139,69,19,0.9);
+    transition: transform .2s
+}
+
+.deleteIcon:hover {
+    transform: scale(1.1)
+}
+
+
