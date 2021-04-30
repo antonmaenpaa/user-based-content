@@ -6,7 +6,7 @@ add, edit, delete your own blogposts.
 Created with MongoDB, Express.js, React.js and Node.js.
 
 To use admin:   
-email: admin  
+username: admin  
 password: 123  
 
 ## Run these commands when cloning this project

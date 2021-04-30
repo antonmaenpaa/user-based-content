@@ -6,13 +6,13 @@ const Users = require("../DbModel/UserSchema");
 const userLoggedIn = require("../Middleware/secure");
 
 router.post('/register', async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10)
- if(req.body.email === "" || req.body.password === "") {
+ if(req.body.username === "" || req.body.password === "") {
    return res.status(400).json('You have to fill in the empty fields')
  }
   const user = await Users.create({
-    email: req.body.email,
+    username: req.body.username,
     password: hashedPassword,
     role: "noob"
   }) 
@@ -21,15 +21,15 @@ router.post('/register', async (req, res) => {
   // bind to register input fields
 });
 
-router.post("/authenticated", userLoggedIn, (req, res) => res.status(200).json({email: req.session.email, role: req.session.role}))
+router.post("/authenticated", userLoggedIn, (req, res) => res.status(200).json({username: req.session.username, role: req.session.role}))
 
 router.post("/login", async (req, res) => {
   
-  const { email, password } = req.body;
+  const { username, password } = req.body;
  
  
   const users = await Users.find({});
-  const foundUser = await users.find(user => user.email === email)
+  const foundUser = await users.find(user => user.username === username)
   
 
   if(!foundUser || !await bcrypt.compare(password, foundUser.password)) {
@@ -38,7 +38,7 @@ router.post("/login", async (req, res) => {
   }
 
   req.session.userId = foundUser._id
-  req.session.email = foundUser.email
+  req.session.username = foundUser.username
   req.session.role = foundUser.role
   
 

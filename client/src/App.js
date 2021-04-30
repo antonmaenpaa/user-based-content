@@ -13,12 +13,12 @@ class App extends Component {
       loggedInUser: false,
       user: "",
       password: "",
-      email: ""
+      username: ""
     };
 
     this.logOut = this.logOut.bind(this);
     this.passwordField = this.passwordField.bind(this);
-    this.emailField = this.emailField.bind(this);
+    this.usernameField = this.usernameField.bind(this);
     this.loginButton = this.loginButton.bind(this);
     this.getUserFromLocalStorage = this.getUserFromLocalStorage.bind(this);
 
@@ -68,15 +68,15 @@ class App extends Component {
       });
     }
 
-    emailField(e) {
+    usernameField(e) {
       this.setState({
-        email: e.target.value,
+        username: e.target.value,
       });
     }
 
     async loginButton() {
     let body = {
-        email: this.state.email,
+        username: this.state.username,
         password: this.state.password,
     };
     const response = await fetch('/login', {
@@ -87,7 +87,7 @@ class App extends Component {
         },
     });
     const data = await response.json();
-    localStorage.setItem('user', data.email);
+    localStorage.setItem('user', data.username);
     let userStorage = localStorage.getItem("user");
 
     if (data !== 'USER NOT FOUND') {
@@ -114,9 +114,9 @@ class App extends Component {
               <Login 
               loginButton={this.loginButton}
               passwordField={(e) => this.passwordField(e)} 
-              emailField={e => this.emailField(e)}
+              usernameField={(e) => this.usernameField(e)}
               password={this.state.password}
-              email={this.state.email}
+              username={this.state.username}
               loggedInUser={this.state.loggedInUser}
               />
             </Route>
