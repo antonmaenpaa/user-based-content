@@ -110,6 +110,8 @@ const rootStyle = {
     boxShadow: "5px 5px",
     marginTop: "5rem",
     overflowy: "hidden",
+    background: "beige",
+
 }
 
 const RegisText = {
@@ -140,8 +142,10 @@ const ButtonLogin = {
   height: "2rem",
   margin: "1rem",
   color: "white",
-  backgroundColor: "green",
+  backgroundColor: "saddlebrown",
   cursor: "pointer",
+  borderRadius: "2px",
+
 }
 
 const ButtonReg = {

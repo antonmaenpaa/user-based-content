@@ -1,63 +1,59 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from 'react-router-dom';
 
 
 function Header(props) {
   return (
     <div style={rootStyle}>
-      {/* <img src={'../giraff.png'}  width={100} alt={"Giraff"}/> */}
       <div style={blogContainer}>
          <Link style={blogPost} to="/">
-            <p>Blogposts</p>
+            <span style={{fontSize: "1rem"}}>Blogposts</span>
          </Link>
+         <div>
+         <span style={{ fontSize: "1rem", marginRight: "0.5rem"}}>{props.user}</span>
       {props.loggedInUser === true ? (
-         <Link style={loginLink} to="/">
-            <h2 onClick={props.logOut}>Logout</h2>
+         <Link style={blogPost} to="/">
+            <span style={{ fontSize: "1rem" }} onClick={props.logOut}>Logout</span>
         </Link>
       ) : (
-        <Link style={loginLink} to="/login">
-          <p>Login</p>
+        <Link style={blogPost} to="/login">
+          <span style={{ fontSize: "1rem" }}>Login</span>
         </Link>
       )}
+      </div>
     </div>
     </div>
   );
 }
 
 const rootStyle = {
-  // display: "sticky",
-  // padding: "0 2rem",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  textAlign: "center",
+  padding: "0 2rem",
   background: "saddlebrown",
-  // left: 0,
-  // right: 0,
-  // top: 0,
-  height: "15%",
-  // position: "relative",
+  left: 0,
+  right: 0,
+  top: 0,
+  position: "relative",
+  height: "4rem"
 
 };
 
 const blogContainer = {
-  display: "inline-flex",
+  display: "flex",
+  width: "90%",
+  justifyContent: "space-between",
+  alignItems: "center"
 }
 
 const blogPost = {
   textDecoration: "none",
   color: "white",
   fontFamily: "Lucida Console, Courier New, monospace",
-  fontSize: "30px",
+  fontSize: "2rem",
   position: "relative",
 
 };
-
-const loginLink = {
-  textDecoration: "none",
-  color: "white",
-  fontFamily: "Lucida Console, Courier New, monospace",
-  fontSize: "30px",
-  vericalAlign: "right",
-
-}
-
-
-
 export default Header;

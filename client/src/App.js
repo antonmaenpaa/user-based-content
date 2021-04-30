@@ -131,8 +131,7 @@ class App extends Component {
 }
 
 const rootStyle = {
-  height: "100%",
-  background: "beige",
+  height: "100%"
 };
 
 export default App;

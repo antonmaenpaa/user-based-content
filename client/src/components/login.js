@@ -74,6 +74,7 @@ const rootStyle = {
     margin: 'auto',
     boxShadow: '5px 5px',
     marginTop: '8rem',
+    background: "beige",
 };
 const LoginText = {
     position: 'relative',
@@ -96,12 +97,14 @@ const InputFieldPassword = {
 
 const ButtonLogin = {
     display: 'block',
-    width: '80%',
+    width: '82%',
     height: '2rem',
     margin: '1rem',
     color: 'white',
-    backgroundColor: 'green',
+    backgroundColor: 'saddlebrown',
     cursor: 'pointer',
+    borderRadius: '2px',
+
 };
 
 const ButtonReg = {
