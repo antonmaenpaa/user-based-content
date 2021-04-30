@@ -33,7 +33,6 @@ class MasterView extends Component {
       },
     });
     const data = await response.json();
-    console.log(data)
     this.setState({
       role: data.role
     })
