@@ -43,6 +43,10 @@ const rootStyle = {
   webkitboxShadow: "1px 1px 5px 0px rgba(0,0,0,0.75)",
   MozBoxShadow: "1px 1px 5px 0px rgba(0,0,0,0.75)",
   boxShadow: "1px 1px 5px 0px rgba(0,0,0,0.75)",
+  width: "30%",
+  display: "inline-block",
+
+  
 };
 
 export default Post;

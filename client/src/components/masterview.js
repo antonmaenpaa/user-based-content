@@ -190,7 +190,6 @@ class MasterView extends Component {
 
 const formDiv = {
   width: "100%",
-  background: "black",
   height: "12rem",
   display: "flex",
   justifyContent: "center",
@@ -207,6 +206,7 @@ const form = {
   textAlign: "center",
   maxWidth: "15rem",
   marginBottom: "2rem",
+  flexGrow: "2",
   color: "white",
   position: "sticky",
   bottom: 0,
