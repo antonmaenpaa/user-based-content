@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { MdModeEdit, MdDelete } from "react-icons/md";
-// import Cookies from 'universal-cookie';
-
-// const cookies = new Cookies();
+import "../styling/post.css"
 
 class Post extends Component {
   constructor(props) {
@@ -12,56 +10,36 @@ class Post extends Component {
     }
   }
 
-  async componentDidMount() {
-
-  }
-
   render() {
 
     const userStorage = localStorage.getItem('user')
-    // console.log(this.props.admin)
    
     return (
-      <div style={rootStyle}>
+      <div className="rootStyle">
         {
           userStorage === this.props.name | this.props.admin === "admin" ? (
-          <>
-          <MdModeEdit
-            style={{ fontSize: "1.5rem", marginRight: "1rem", cursor: "pointer" }}
-            onClick={this.props.editPost}
-          />
-          <MdDelete
-            style={{ fontSize: "1.5rem", cursor: "pointer" }}
-            onClick={this.props.deletePost}
-          />
-          </>
+          <div className="icons">
+            <MdModeEdit
+              className="editIcon"
+              onClick={this.props.editPost}
+            />
+            <MdDelete
+              className="deleteIcon"
+              onClick={this.props.deletePost}
+            />
+          </div>
 
           ) : (
             <></>
           )
         }
- 
-            <h4 type="title">{this.props.title}</h4>
-            <p type="text">{this.props.text}</p>
-            <p>{this.props.name}'s post</p>
-
-
+            <h4 className="title" type="title">{this.props.title}</h4>
+            <div className="titleUnderline"></div>
+            <p className="text" type="text">{this.props.text}</p>
+            <p style={{ color: "lightgrey" }}>@{this.props.name}'s post</p>
       </div>
-
-
     );
   }
-
   }
-
-const rootStyle = {
-  backgroundColor: "lightgrey",
-  margin: ".5rem",
-  padding: ".5rem 2rem",
-  textAlign: "center",
-  webkitboxShadow: "1px 1px 5px 0px rgba(0,0,0,0.75)",
-  MozBoxShadow: "1px 1px 5px 0px rgba(0,0,0,0.75)",
-  boxShadow: "1px 1px 5px 0px rgba(0,0,0,0.75)",
-};
 
 export default Post;

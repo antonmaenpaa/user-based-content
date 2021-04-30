@@ -24,9 +24,9 @@ export default class Log extends Component {
                     <h2 style={LoginText}>Please login</h2>
                     <input
                         style={InputFieldName}
-                        onChange={(e) => this.props.emailField(e)}
-                        value={this.props.email}
-                        placeholder="Email"
+                        onChange={(e) => this.props.usernameField(e)}
+                        value={this.props.username}
+                        placeholder="Username"
                     />
                     <input
                         style={InputFieldPassword}
