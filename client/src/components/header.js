@@ -1,43 +1,63 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 
-class Header extends Component {
-  render() {
-    return (
-      <div style={rootStyle}>
-        <Link style={linkStyle} to="/">
-          <h2>Blogposts</h2>
+
+function Header(props) {
+  return (
+    <div style={rootStyle}>
+      {/* <img src={'../giraff.png'}  width={100} alt={"Giraff"}/> */}
+      <div style={blogContainer}>
+         <Link style={blogPost} to="/">
+            <p>Blogposts</p>
+         </Link>
+      {props.loggedInUser === true ? (
+         <Link style={loginLink} to="/">
+            <h2 onClick={props.logOut}>Logout</h2>
         </Link>
-        <h2 style={{color: "white"}}>{this.props.user}</h2>
-  
-        {this.props.loggedInUser === true ? (
-          <Link style={linkStyle} to="/">
-            <h2 onClick={this.props.logOut}>Logout</h2>
-          </Link>
-        ) : (
-          <Link style={linkStyle} to="/login">
-            <h2>Login</h2>
-          </Link>
-        )}
-      </div>
-    );
-  }
+      ) : (
+        <Link style={loginLink} to="/login">
+          <p>Login</p>
+        </Link>
+      )}
+    </div>
+    </div>
+  );
 }
 
 const rootStyle = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    padding: '0 2rem',
-    background: 'black',
-    position: 'sticky',
-    left: 0,
-    right: 0,
-    top: 0,
+  // display: "sticky",
+  // padding: "0 2rem",
+  background: "saddlebrown",
+  // left: 0,
+  // right: 0,
+  // top: 0,
+  height: "15%",
+  // position: "relative",
+
 };
 
-const linkStyle = {
-    textDecoration: 'none',
-    color: 'white',
+const blogContainer = {
+  display: "inline-flex",
+}
+
+const blogPost = {
+  textDecoration: "none",
+  color: "white",
+  fontFamily: "Lucida Console, Courier New, monospace",
+  fontSize: "30px",
+  position: "relative",
+
 };
+
+const loginLink = {
+  textDecoration: "none",
+  color: "white",
+  fontFamily: "Lucida Console, Courier New, monospace",
+  fontSize: "30px",
+  vericalAlign: "right",
+
+}
+
+
 
 export default Header;
